@@ -53,6 +53,9 @@ let mapleader =" "
 " 'Cause screw pressing C-w twice.
 nnoremap <leader><leader> <C-w><C-w>
 
+" Jump to matching parens using tab.
+nnoremap <tab> %
+
 " Because why not?
 inoremap <esc> <esc><esc>
 
@@ -89,12 +92,12 @@ nnoremap <C-j><C-s> :w<CR>
 nnoremap <leader>d :bd<CR>
 
 " vim-surround is nice, but this is faster!
-vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-vnoremap $q <esc>`>a'<esc>`<i'<esc>
-vnoremap $e <esc>`>a"<esc>`<i"<esc
+vnoremap #1 <esc>`>a)<esc>`<i(<esc>
+vnoremap #2 <esc>`>a]<esc>`<i[<esc>
+vnoremap #3 <esc>`>a}<esc>`<i{<esc>
+vnoremap #$ <esc>`>a"<esc>`<i"<esc>
+vnoremap #q <esc>`>a'<esc>`<i'<esc>
+vnoremap #e <esc>`>a"<esc>`<i"<esc
 
 " Convenience on the command line.
 cno $h e ~/
@@ -137,6 +140,7 @@ call minpac#add("ncm2/ncm2-path")
 call minpac#add("ncm2/ncm2-ultisnips")
 call minpac#add("easymotion/vim-easymotion")
 call minpac#add("rhysd/committia.vim")
+call minpac#add("w0rp/ale")
 
 " Optional plug-ins
 call minpac#add("autozimu/LanguageClient-neovim", {'type' : 'opt'})
