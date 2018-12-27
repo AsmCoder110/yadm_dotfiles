@@ -92,12 +92,12 @@ nnoremap <C-j><C-s> :w<CR>
 nnoremap <leader>d :bd<CR>
 
 " vim-surround is nice, but this is faster!
-vnoremap #1 <esc>`>a)<esc>`<i(<esc>
-vnoremap #2 <esc>`>a]<esc>`<i[<esc>
-vnoremap #3 <esc>`>a}<esc>`<i{<esc>
-vnoremap #$ <esc>`>a"<esc>`<i"<esc>
-vnoremap #q <esc>`>a'<esc>`<i'<esc>
-vnoremap #e <esc>`>a"<esc>`<i"<esc
+vnoremap %1 <esc>`>a)<esc>`<i(<esc>
+vnoremap %2 <esc>`>a]<esc>`<i[<esc>
+vnoremap %3 <esc>`>a}<esc>`<i{<esc>
+vnoremap %$ <esc>`>a"<esc>`<i"<esc>
+vnoremap %q <esc>`>a'<esc>`<i'<esc>
+vnoremap %e <esc>`>a"<esc>`<i"<esc
 
 " Convenience on the command line.
 cno $h e ~/
