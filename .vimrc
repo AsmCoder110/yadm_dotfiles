@@ -79,7 +79,7 @@ autocmd! bufwritepost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
 " Switch to next buffer using <leader>>
 nnoremap <leader>> :bn<CR>
 
-" Switch to next buffer using <leader>>
+" Switch to previous buffer using <leader><
 nnoremap <leader>< :bp<CR>
 
 " Save files using <C-j><C-s>
