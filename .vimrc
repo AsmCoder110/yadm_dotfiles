@@ -18,7 +18,8 @@ set undodir=/home/asmcoder/.vim/undo  " -- in this directory.
 set backspace=indent,eol,start        " Backspace over autoindents, line breaks, start of insert.
 set splitbelow splitright             " Split windows below and to the right by default.
 set hidden                            " Hide buffer, don't close them.
-set autoread                          " have vim re-load files when they're changed outside of vim
+set noswapfile                        " Allow buffers to be edited from other instances of vim and--
+set autoread                          " -- have vim re-load files when they're changed elsewhere.
 set exrc                              " Allow external vimrcs--
 set secure                            " -- with secure commands.
 set shiftwidth=4                      " 4 spaces for tabs.
@@ -141,6 +142,7 @@ call minpac#add("ncm2/ncm2-ultisnips")
 call minpac#add("easymotion/vim-easymotion")
 call minpac#add("rhysd/committia.vim")
 call minpac#add("w0rp/ale")
+call minpac#add("nhooyr/neoman.vim")
 
 " Optional plug-ins
 call minpac#add("autozimu/LanguageClient-neovim", {'type' : 'opt'})
