@@ -105,6 +105,9 @@ cno $h e ~/
 cno $d e ~/Desktop/
 cno $j e ./
 
+" Configure EasyMotion's leader key.
+let g:EasyMotion_leader_key ='\'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""MINPAC""""""""""""""""""""""""""""""""
@@ -141,11 +144,12 @@ call minpac#add("ncm2/ncm2-path")
 call minpac#add("ncm2/ncm2-ultisnips")
 call minpac#add("easymotion/vim-easymotion")
 call minpac#add("rhysd/committia.vim")
-call minpac#add("w0rp/ale")
 call minpac#add("nhooyr/neoman.vim")
 
 " Optional plug-ins
 call minpac#add("autozimu/LanguageClient-neovim", {'type' : 'opt'})
+call minpac#add("yuttie/hydrangea-vim", {'type' : 'opt'})
+call minpac#add("w0rp/ale", {'type': 'opt'})
 call minpac#add("drewtempelmeyer/palenight.vim", {'type' : 'opt'})
 call minpac#add("tpope/vim-scriptease", {'type' : 'opt'})
 call minpac#add("k-takata/minpac", {'type' : 'opt'})
@@ -160,12 +164,12 @@ command! PackStatus call minpac#status()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Activate italics.
+let g:palenight_terminal_italics=1
+
 " custom theme.
 packadd! palenight.vim
 colors palenight
-
-" Activate italics.
-let g:palenight_terminal_italics=1
 
 " Make themes transparent.
 hi! Normal ctermbg=NONE guibg=NONE
