@@ -51,7 +51,13 @@ set background=dark
 " Use Space as the leader key.
 let mapleader =" "
 
-" 'Cause screw pressing C-w twice.
+" Kanji search in wdic from the open file
+map <leader>ks :!kitty @ send-text --match title:Output @* \\x0D<CR>
+
+" Send the selected text to kanji.log
+map <leader>kS v}:w>>/home/asmcoder/kanji.log<CR><CR>
+
+"" 'Cause screw pressing C-w tefile(split(@@, "\n", 1), 'x.tmp')tefile(split(@@, "\n", 1), 'x.tmp')twice.
 nnoremap <leader><leader> <C-w><C-w>
 
 " Jump to matching parens using tab.
@@ -64,7 +70,7 @@ inoremap <esc> <esc><esc>
 nnoremap gV `[v`]
 
 " Copy paste text from the system's clipboard using <leader>[y|p].
-vnoremap <leader>y "+y
+nnoremap <leader>y "+y
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
@@ -87,7 +93,7 @@ nnoremap <leader>> :bn<CR>
 nnoremap <leader>< :bp<CR>
 
 " Save files using <C-j><C-s>
-nnoremap <C-j><C-s> :w<CR>
+noremap <C-j><C-s> :w<CR>
 
 " Delete buffer
 nnoremap <leader>d :bd<CR>
@@ -129,27 +135,26 @@ call minpac#add("tpope/vim-surround")
 call minpac#add("tpope/vim-unimpaired")
 call minpac#add("tpope/vim-vinegar")
 call minpac#add("junegunn/fzf.vim")
+call minpac#add("SirVer/ultisnips")
 call minpac#add("machakann/vim-highlightedyank")
 call minpac#add("jiangmiao/auto-pairs")
-call minpac#add("Shougo/deoplete.nvim")
-call minpac#add("roxma/nvim-yarp")
-call minpac#add("roxma/vim-hug-neovim-rpc")
 call minpac#add("mbbill/undotree")
-call minpac#add("SirVer/ultisnips")
-call minpac#add("honza/vim-snippets")
-call minpac#add("ncm2/ncm2")
-call minpac#add("ncm2/ncm2-bufword")
-call minpac#add("ncm2/ncm2-tmux")
-call minpac#add("ncm2/ncm2-path")
-call minpac#add("ncm2/ncm2-ultisnips")
 call minpac#add("easymotion/vim-easymotion")
 call minpac#add("rhysd/committia.vim")
 call minpac#add("nhooyr/neoman.vim")
+call minpac#add("honza/vim-snippets")
+call minpac#add("kien/rainbow_parentheses.vim")
+call minpac#add("airblade/vim-rooter")
 
 " Optional plug-ins
-call minpac#add("autozimu/LanguageClient-neovim", {'type' : 'opt'})
+call minpac#add("jpalardy/vim-slime", {'type': 'opt'})
+call minpac#add("vhdirk/vim-cmake", {'type': 'opt'})
+call minpac#add("udalov/kotlin-vim", {'type' : 'opt'})
+call minpac#add("pangloss/vim-javascript", {'type' : 'opt'})
+call minpac#add("mxw/vim-jsx", {'type' : 'opt'})
 call minpac#add("yuttie/hydrangea-vim", {'type' : 'opt'})
 call minpac#add("w0rp/ale", {'type': 'opt'})
+call minpac#add("mattn/emmet-vim", {'type': 'opt'})
 call minpac#add("drewtempelmeyer/palenight.vim", {'type' : 'opt'})
 call minpac#add("tpope/vim-scriptease", {'type' : 'opt'})
 call minpac#add("k-takata/minpac", {'type' : 'opt'})
@@ -171,19 +176,17 @@ let g:palenight_terminal_italics=1
 packadd! palenight.vim
 colors palenight
 
+"Rainbow Parentheses
+" Always On
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 " Make themes transparent.
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
 
 """ Deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_refresh_delay = 1
-let g:deoplete#num_processes = 15
-
-""" Ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Want :UltiSnipsEdit to split window.
 let g:UltiSnipsEditSplit="vertical"
@@ -200,7 +203,27 @@ set shortmess+=c
 """ Keybindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Update Packages.
 nnoremap <C-j><C-p> :call minpac#update()<CR>
+
+"""""""""""""""""""""""" Vim Surround """""""""""""""""""""""""""""""""""
+
+" Select till the last word and ask to surround that.
+nmap <leader>v v$hS
+
+
+"""""""""""""""""""""""" Nman """""""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>m :execute "Vnman ". expand("<cword>")<CR>
+
+"""""""""""""""""""""""" Tabs """""""""""""""""""""""""""""""""""
+" J to switch to next tab.
+nmap J :tabn<CR>
+
+" K to switch previous.
+nmap K :tabp<CR>
+
+" Ctrl-k to look up words under the cursor (previously bound to 'K').
+noremap <c-k> :execute "tab h " . expand("<cword>")<cr>
 
 """""""""""""""""""""""" FZF """""""""""""""""""""""""""""""""""
 " Browse files
@@ -210,7 +233,7 @@ nnoremap <C-j><C-f> :FZF<CR>
 nnoremap <C-j><C-b> :Buffers<CR>
 
 " List Command line history.
-nnoremap <C-j><C-c> :History:<CR>
+nnoremap <C-j><C-m> :History:<CR>
 
 " List history of files opened.
 nnoremap <C-j><C-h> :History<CR>
@@ -225,8 +248,8 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 nmap s <Plug>(easymotion-overwin-f2)
 
 " Move to line
-map <Leader>L <Plug>(easymotion-bd-jk)
-nmap <Leader>L <Plug>(easymotion-overwin-line)
+map <Leader>l <Plug>(easymotion-bd-jk)
+nmap <Leader>l <Plug>(easymotion-overwin-line)
 
 " Move to word
 map  <Leader>w <Plug>(easymotion-bd-w)
@@ -234,7 +257,18 @@ nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 
 """ NCM2
+au TextChangedI * call ncm2#auto_trigger()
+
+
 inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+ "inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
+
+""" Ultisnips
+let g:UltiSnipsExpandTrigger             = "<tab>"
+let g:UltiSnipsJumpForwardTrigger        = "<c-b>"
+let g:UltiSnipsJumpBackwardTrigger       = "<c-z>"
+let g:UltiSnipsListSnippets              = "<c-tab>"
+let g:UltisnipsRemoveSelectModeMappings  = 0
 
 """ UndoTree bindings
 nnoremap <Leader>U :UndotreeToggle<CR>
