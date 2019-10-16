@@ -191,13 +191,6 @@ hi! NonText ctermbg=NONE guibg=NONE
 " Want :UltiSnipsEdit to split window.
 let g:UltiSnipsEditSplit="vertical"
 
-""" ncm2
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-
-" suppress the annoying 'match x of y', 'The only match' and 'Pattern not
-" found' messages
-set shortmess+=c
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Keybindings
@@ -256,12 +249,6 @@ map  <Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader>w <Plug>(easymotion-overwin-w)
 
 
-""" NCM2
-au TextChangedI * call ncm2#auto_trigger()
-
-
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
- "inoremap <silent> <expr> <CR> ((pumvisible() && empty(v:completed_item)) ?  "\<c-y>\<cr>" : (!empty(v:completed_item) ? ncm2_ultisnips#expand_or("", 'n') : "\<CR>" ))
 
 """ Ultisnips
 let g:UltiSnipsExpandTrigger             = "<tab>"
