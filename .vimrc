@@ -24,6 +24,7 @@ set exrc                              " Allow external vimrcs--
 set secure                            " -- with secure commands.
 set shiftwidth=4                      " 4 spaces for tabs.
 set ttyfast                           " Why not?
+set cursorline                        " Show cursor line.
 
 " Load and save views before writing/reading a buffer to a file.
 au BufWrite * silent! mkview
@@ -32,12 +33,8 @@ au BufRead * silent! loadview
 " Automatically deletes all trailing whitespace on save.
 autocmd BufWritePre * silent! %s/\s\+$//e
 
-" Turn on 24-bit colors if available.
-if (has("termguicolors"))
-    set t_8f=[38;2;%lu;%lu;%lum
-    set t_8b=[48;2;%lu;%lu;%lum
-    set termguicolors
-endif
+" Use 24-bit colors.
+set termguicolors
 
 set background=dark
 
@@ -229,7 +226,7 @@ nnoremap <C-j><C-b> :Buffers<CR>
 nnoremap <C-j><C-m> :History:<CR>
 
 " List history of files opened.
-nnoremap <C-j><C-h> :History<CR>
+nnoremap <C-j><C-i> :History<CR>
 
 """""""""""""""""""""""" Easymotion """""""""""""""""""""""""""""""""""
 
