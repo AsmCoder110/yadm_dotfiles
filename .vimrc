@@ -38,7 +38,6 @@ set termguicolors
 
 set background=dark
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""SHORTCUTS"""""""""""""""""""""""""""""
@@ -47,15 +46,14 @@ set background=dark
 
 " Use Space as the leader key.
 let mapleader =" "
-
 " Kanji search in wdic from the open file
 map <leader>ks :!kitty @ send-text --match title:Output @* \\x0D<CR>
 
 " Send the selected text to kanji.log
 map <leader>kS v}:w>>/home/asmcoder/kanji.log<CR><CR>
 
-"" 'Cause screw pressing C-w tefile(split(@@, "\n", 1), 'x.tmp')tefile(split(@@, "\n", 1), 'x.tmp')twice.
-nnoremap <leader><leader> <C-w><C-w>
+"" 'Cause screw pressing C-w twice.
+nnoremap <space><space> <C-w><C-w>
 
 " Jump to matching parens using tab.
 nnoremap <tab> %
@@ -67,9 +65,9 @@ inoremap <esc> <esc><esc>
 nnoremap gV `[v`]
 
 " Copy paste text from the system's clipboard using <leader>[y|p].
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
+map <leader>y "+y
+map <leader>p "+p
+map <leader>P "+P
 
 " Edit vimrc using <leader>e.
 nnoremap <leader>e :e ~/.vimrc<CR>
@@ -82,15 +80,9 @@ autocmd! bufwritepost ~/.vimrc source ~/.vimrc
 autocmd! bufwritepost ~/.gvimrc source ~/.gvimrc
 autocmd! bufwritepost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
 
-
-" Switch to next buffer using <leader>>
-nnoremap <leader>> :bn<CR>
-
-" Switch to previous buffer using <leader><
-nnoremap <leader>< :bp<CR>
-
 " Save files using <C-j><C-s>
 noremap <C-j><C-s> :w<CR>
+inoremap <C-j><C-s> <C-o>:w<CR>
 
 " Delete buffer
 nnoremap <leader>d :bd<CR>
@@ -103,14 +95,6 @@ vnoremap %$ <esc>`>a"<esc>`<i"<esc>
 vnoremap %q <esc>`>a'<esc>`<i'<esc>
 vnoremap %e <esc>`>a"<esc>`<i"<esc
 
-" Convenience on the command line.
-cno $h e ~/
-cno $d e ~/Desktop/
-cno $j e ./
-
-" Configure EasyMotion's leader key.
-let g:EasyMotion_leader_key ='\'
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""MINPAC""""""""""""""""""""""""""""""""
@@ -120,14 +104,10 @@ let g:EasyMotion_leader_key ='\'
 packadd minpac
 call minpac#init()
 
-call minpac#add("tpope/vim-characterize")
 call minpac#add("tpope/vim-commentary")
-call minpac#add("tpope/vim-eunuch")
-call minpac#add("tpope/vim-fugitive")
 call minpac#add("tpope/vim-obsession")
 call minpac#add("tpope/vim-repeat")
 call minpac#add("tpope/vim-rsi")
-call minpac#add("tpope/vim-sensible")
 call minpac#add("tpope/vim-surround")
 call minpac#add("tpope/vim-unimpaired")
 call minpac#add("tpope/vim-vinegar")
@@ -136,14 +116,20 @@ call minpac#add("SirVer/ultisnips")
 call minpac#add("machakann/vim-highlightedyank")
 call minpac#add("jiangmiao/auto-pairs")
 call minpac#add("mbbill/undotree")
-call minpac#add("easymotion/vim-easymotion")
 call minpac#add("rhysd/committia.vim")
-call minpac#add("nhooyr/neoman.vim")
 call minpac#add("honza/vim-snippets")
-call minpac#add("kien/rainbow_parentheses.vim")
+call minpac#add("luochen1990/rainbow")
 call minpac#add("airblade/vim-rooter")
+call minpac#add("neoclide/coc.nvim")
+call minpac#add("skywind3000/asyncrun.vim")
 
 " Optional plug-ins
+call minpac#add("tpope/vim-characterize",{'type':'opt'})
+call minpac#add("lervag/vimtex",{'type':'opt'})
+call minpac#add("KeitaNakamura/tex-conceal.vim",{'type':'opt'})
+call minpac#add("tpope/vim-fugitive",{'type':'opt'})
+call minpac#add("tikhomirov/vim-glsl",{'type':'opt'})
+call minpac#add("drewtempelmeyer/palenight.vim", {'type': 'opt'})
 call minpac#add("jpalardy/vim-slime", {'type': 'opt'})
 call minpac#add("vhdirk/vim-cmake", {'type': 'opt'})
 call minpac#add("udalov/kotlin-vim", {'type' : 'opt'})
@@ -152,7 +138,7 @@ call minpac#add("mxw/vim-jsx", {'type' : 'opt'})
 call minpac#add("yuttie/hydrangea-vim", {'type' : 'opt'})
 call minpac#add("w0rp/ale", {'type': 'opt'})
 call minpac#add("mattn/emmet-vim", {'type': 'opt'})
-call minpac#add("drewtempelmeyer/palenight.vim", {'type' : 'opt'})
+call minpac#add("morhetz/gruvbox", {'type': 'opt'})
 call minpac#add("tpope/vim-scriptease", {'type' : 'opt'})
 call minpac#add("k-takata/minpac", {'type' : 'opt'})
 
@@ -173,25 +159,37 @@ let g:palenight_terminal_italics=1
 packadd! palenight.vim
 colors palenight
 
-"Rainbow Parentheses
-" Always On
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" Rainbow parentheses
+let g:rainbow_active=1
+
 " Make themes transparent.
 hi! Normal ctermbg=NONE guibg=NONE
 hi! NonText ctermbg=NONE guibg=NONE
 
-""" Deoplete
+""""""
+" Latex
+"
+let g:tex_flavor='latex'
+let g:vimtex_quickfix_mode=0
+let g:vimtex_view_method='zathura'
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
+""
+" Ultisnips directory
 " Want :UltiSnipsEdit to split window.
 let g:UltiSnipsEditSplit="vertical"
-
+let g:UltiSnipsSnippetDirectories=[ "/home/asmcoder/.config/UltiSnips/", "UltiSnips" ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Keybindings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" ALE keymaps
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
 
 " Update Packages.
 nnoremap <C-j><C-p> :call minpac#update()<CR>
@@ -201,16 +199,10 @@ nnoremap <C-j><C-p> :call minpac#update()<CR>
 " Select till the last word and ask to surround that.
 nmap <leader>v v$hS
 
-
 """""""""""""""""""""""" Nman """""""""""""""""""""""""""""""""""
-nnoremap <silent> <leader>m :execute "Vnman ". expand("<cword>")<CR>
+nnoremap <silent> <leader>m :silent execute "Vnman ". expand("<cword>")<CR>
 
 """""""""""""""""""""""" Tabs """""""""""""""""""""""""""""""""""
-" J to switch to next tab.
-nmap J :tabn<CR>
-
-" K to switch previous.
-nmap K :tabp<CR>
 
 " Ctrl-k to look up words under the cursor (previously bound to 'K').
 noremap <c-k> :execute "tab h " . expand("<cword>")<cr>
@@ -228,28 +220,9 @@ nnoremap <C-j><C-m> :History:<CR>
 " List history of files opened.
 nnoremap <C-j><C-i> :History<CR>
 
-"""""""""""""""""""""""" Easymotion """""""""""""""""""""""""""""""""""
-
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
-
-" s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
-
-" Move to line
-map <Leader>l <Plug>(easymotion-bd-jk)
-nmap <Leader>l <Plug>(easymotion-overwin-line)
-
-" Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
-
-
-
 """ Ultisnips
 let g:UltiSnipsExpandTrigger             = "<tab>"
-let g:UltiSnipsJumpForwardTrigger        = "<c-b>"
+let g:UltiSnipsJumpForwardTrigger        = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger       = "<c-z>"
 let g:UltiSnipsListSnippets              = "<c-tab>"
 let g:UltisnipsRemoveSelectModeMappings  = 0
