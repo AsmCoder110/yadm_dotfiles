@@ -43,6 +43,9 @@ bindsym $mod+Shift+q kill
 #
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $bg2 i3wm.color8 #f0f0f0
+set_from_resource $colorA i3wm.color11 #f0f0f0
+set_from_resource $colorB i3wm.color3 #f0f0f0
 
 # class                 border  backgr. text indicator child_border
 client.focused          $bg     $bg     $fg  $bg       $bg
@@ -181,9 +184,20 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+set_from_resource $bg2 i3wm.color0 #f0f0f0
+set_from_resource $colorA i3wm.color11 #f0f0f0
+set_from_resource $colorB i3wm.color5 #f0f0f0
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+        colors{
+            background $bgAA
+            focused_workspace $bg $colorB $bg2
+            inactive_workspace $fg $bg $colorA66
+        }
         font pango:sans-serif 8
         mode hide
         status_command i3blocks
@@ -213,27 +227,27 @@ exec --no-startup-id "alacritty -t wdic-scratch -e zsh -d -f --rcs /home/asmcode
 
 ## Key Bindings for common apps.
 bindsym $mod+q exec qutebrowser
-bindsym $mod+Shift+z exec --no-startup-id "zathura"
+bindsym Ctrl+Shift+z exec --no-startup-id "vimb http://localhost:1024"
 bindsym $mod+Shift+r exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/r.sh"
-bindsym Mod4+Ctrl+r exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/rtv.sh"
+bindsym $mod+Shift+a exec --no-startup-id "alacritty"
 bindsym Mod4+Shift+r exec --no-startup-id "systemctl reboot"
-##bindsym $mod+Ctrl+g exec --no-startup-id "bsnes-performance"
 bindsym $mod+Shift+v exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/v.sh"
 bindsym $mod+Shift+h exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/htop.sh"
-bindsym $mod+Shift+g exec --no-startup-id "tixati"
 bindsym Mod4+Shift+o exec --no-startup-id "rofi -no-lazy-grab -show window"
 bindsym $mod+Shift+t exec --no-startup-id "tor-browser"
+bindsym $mod+Shift+g exec --no-startup-id "deluge"
+bindsym $mod+Ctrl+semicolon exec --no-startup-id "rofi -show"
 bindsym $mod+Ctrl+f exec --no-startup-id "scrot -a 1360,0,1920,1080"
 bindsym $mod+Shift+o exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/i3config.sh"
 bindsym $mod+Shift+m  exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/n.sh"
 bindsym $mod+Shift+n  exec --no-startup-id "kitty zsh -d -f --rcs /home/asmcoder/install/scripts/nnn.sh"
-bindsym $mod+Shift+s exec --no-startup-id "/home/asmcoder/install/scripts/screencast.sh screencast"
-bindsym $mod+Shift+a exec --no-startup-id "/home/asmcoder/install/scripts/screencast.sh kill"
 bindsym $mod+Shift+w exec --no-startup-id "/home/asmcoder/install/scripts/switch-bg.sh"
-bindsym Mod4+Shift+g exec --no-startup-id "/home/asmcoder/install/scripts/game.sh"
 bindsym Mod4+Shift+grave exec --no-startup-id "systemctl poweroff"
 bindsym Mod4+Shift+h exec --no-startup-id "systemctl hibernate"
 bindsym Mod4+Shift+l exec --no-startup-id "i3lock"
+
+# mpv control.
+bindsym $mod+Shift+p exec --no-startup-id "~/install/scripts/mpvp.sh"
 
 ## Multimedia keys
 bindsym XF86AudioPlay		exec --no-startup-id mpc toggle
