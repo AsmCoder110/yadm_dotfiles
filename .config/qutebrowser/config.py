@@ -22,7 +22,7 @@ c.fonts.hints = '12pt SourceHanSansJP-Bold'
 c.fonts.prompts = 'SourceHanSansJP-Medium'
 
 
-c.content.proxy='socks://localhost:9050'
+c.content.proxy='system'
 c.scrolling.smooth = True
 c.content.headers.do_not_track = True
 c.downloads.remove_finished = 0
@@ -76,6 +76,7 @@ c.content.host_blocking.lists = ["https://raw.githubusercontent.com/StevenBlack/
 c.content.javascript.enabled = False
 c.content.cookies.accept='no-3rdparty'
 c.content.cookies.store=True
+config.set('content.javascript.enabled', True, 'https://mesonbuild.com')
 config.set('content.javascript.enabled', True, 'https://github.com')
 config.set('content.javascript.enabled', True, 'https://gitlab.com')
 config.set('content.javascript.enabled', True, 'https://duckduckgo.com')
